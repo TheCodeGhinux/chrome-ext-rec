@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Playback</title>
+</head>
+<body>
+  <h1>Uploaded Videos</h1>
+  <ul>
+    <% videos.forEach((video) => { %>
+      <li>
+        <video width="320" height="240" controls>
+          <source src="<%= video.secure_url %>" type="video/mp4">
+          <a href="http://"></a>
+          Your browser does not support the video tag.
+        </video>
+        <!-- Display additional video information -->
+        <p>Public ID: <%= video.public_id %></p>
+        <p>Duration: <%= video.duration %></p>
+        <p>Size: <%= video.bytes / (1024 * 1024) %> MB</p>
+        <!-- Add more video details as needed -->
+      </li>
+    <% }); %>
+  </ul>
+  <h2>Upload a Video</h2>
+  <form action="/api/v1/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="video" accept="video/*" required>
+    <button type="submit">Upload</button>
+  </form>
+</body>
+</html>
